@@ -31,6 +31,7 @@ window.AcidWorks = (() => {
 
   // —— 图形语言渲染（全部复用站内酸性材质词汇）——
   const ART_KINDS = ['liquid', 'chrome', 'holo', 'glitch', 'flat', 'halftone', 'reactive', 'sticker'];
+  const ART_TPL = {};
   function artMarkup(kind, id) {
     if (ART_KINDS.indexOf(kind) < 0) kind = 'liquid';
     switch (kind) {
@@ -100,7 +101,13 @@ window.AcidWorks = (() => {
   function fillLightbox(i) {
     const w = WORKS[i];
     current = i;
-    lbArt.innerHTML = artMarkup(w.art, w.id);
+    lbArt.replaceChildren();
+    const artNode = ART_TPL[w.art] ? ART_TPL[w.art].content.cloneNode(true) : null;
+    if (artNode) {
+      const g = artNode.querySelector('.wf-glyph');
+      if (g) g.textContent = GLYPH[w.id] || '✦';
+      lbArt.appendChild(artNode);
+    }
     lbNo.textContent = 'W.' + w.no + ' / ' + w.year;
     lbTitle.textContent = w.title;
     lbEn.textContent = w.titleEn;
@@ -160,6 +167,12 @@ window.AcidWorks = (() => {
   }
 
   function init() {
+    // 图形模板：常量字符串一次性解析为 template，openLightbox 渲染路径零 innerHTML
+    ART_KINDS.forEach((kind) => {
+      const tpl = document.createElement('template');
+      tpl.innerHTML = artMarkup(kind, '_tpl_');
+      ART_TPL[kind] = tpl;
+    });
     document.querySelectorAll('[data-works-featured]').forEach(renderFeatured);
     document.querySelectorAll('[data-works-grid]').forEach((g) => {
       renderGrid(g, WORKS, { linkBase: '#' });
