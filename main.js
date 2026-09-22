@@ -22,7 +22,12 @@
   /* ---------- boot screen ---------- */
   const boot = doc.getElementById('boot');
   if (boot) {
-    const closeBoot = () => boot.classList.add('done');
+    const closeBoot = () => {
+      if (boot.classList.contains('done')) return;
+      boot.classList.add('done');
+      // 兜底：冻结/后台环境里 transitionend 不触发，850ms 后无论如何硬移除
+      setTimeout(() => boot.remove(), 850);
+    };
     if (reduced) {
       boot.remove();
     } else {
@@ -80,6 +85,10 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
   doc.querySelectorAll('[data-reveal]').forEach((el) => revealIO.observe(el));
+  // 动态渲染的内容（作品墙等）用这个入口接入滚动入场
+  window.AcidReveal = (root) => {
+    (root || doc).querySelectorAll('[data-reveal]:not(.in)').forEach((el) => revealIO.observe(el));
+  };
   // 兜底：IO 不投递（后台/冻结标签页、老浏览器）时直接显示，避免内容永久透明
   setTimeout(() => {
     doc.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => el.classList.add('in'));

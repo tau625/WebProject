@@ -155,136 +155,6 @@
 .mp-foot { margin-top: 14px; }
 
 /* ============================================================
-   REF.02 APEX — 材质卡（皮肤卡语法 × 酸性色框）
-   ============================================================ */
-.mat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: clamp(16px, 2vw, 28px);
-}
-.mat-card {
-  --glow: var(--acid);
-  position: relative;
-  border: 1px solid var(--line);
-  background: var(--bg-2);
-  transition: transform 0.2s ease-out, border-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 0 transparent;
-}
-.mat-card:nth-child(1) { --glow: var(--pink); }
-.mat-card:nth-child(2) { --glow: var(--cyan); }
-.mat-card:nth-child(3) { --glow: var(--acid); }
-.mat-card:hover {
-  border-color: var(--glow);
-  box-shadow: 0 0 36px color-mix(in srgb, var(--glow) 30%, transparent);
-}
-/* 角标框 */
-.mat-card::before, .mat-card::after {
-  content: "";
-  position: absolute;
-  width: 18px; height: 18px;
-  border: 2px solid var(--glow);
-  pointer-events: none;
-}
-.mat-card::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
-.mat-card::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
-
-.mat-art {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-}
-.mat-meta { padding: 20px clamp(18px, 2vw, 26px) 26px; }
-.mat-idx {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  color: var(--glow);
-}
-.mat-name {
-  font-family: var(--cn);
-  font-weight: 900;
-  font-size: 23px;
-  letter-spacing: 0.03em;
-  margin: 10px 0 8px;
-}
-.mat-name em {
-  font-family: var(--mono);
-  font-style: normal; font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--dim);
-  margin-left: 8px;
-}
-.mat-cite { font-size: 13px; color: var(--dim); min-height: 3.2em; }
-.mat-tag {
-  display: inline-block;
-  margin-top: 14px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--glow);
-  border: 1px solid color-mix(in srgb, var(--glow) 55%, transparent);
-  padding: 6px 12px;
-}
-
-/* 材质 1：全息箔 */
-.art-holo-foil {
-  background: linear-gradient(115deg, #ff2d95, #7b2dff, #00e5ff, #d8ff00, #ff2d95);
-  background-size: 320% 320%;
-  animation: holo 6s linear infinite, angleshift 5s ease-in-out infinite;
-}
-@keyframes angleshift { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(42deg); } }
-.sheen {
-  position: absolute; inset: -30%;
-  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.8) 50%, transparent 58%);
-  mix-blend-mode: screen;
-  animation: sheenpass 4.2s ease-in-out infinite;
-}
-@keyframes sheenpass {
-  0%, 100% { transform: translateX(-42%) rotate(6deg); }
-  50%      { transform: translateX(42%) rotate(6deg); }
-}
-
-/* 材质 2：液态铬（复用首页 chrome-orb，加液态轮廓） */
-.art-liquid-chrome { background: radial-gradient(120% 120% at 70% 20%, rgba(0, 229, 255, 0.16), transparent 55%), var(--bg-2); }
-.art-liquid-chrome .chrome-orb {
-  width: 58%;
-  animation: blob 8s ease-in-out infinite;
-}
-
-/* 材质 3：反应式三阶段 */
-.art-reactive { display: flex; gap: 10px; padding: 18px; }
-.stage {
-  position: relative;
-  flex: 1;
-  border: 1px solid var(--line);
-  overflow: hidden;
-}
-.stage i {
-  position: absolute; left: 8px; bottom: 8px;
-  font-family: var(--mono);
-  font-style: normal;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--ink);
-}
-.st-1 { background: linear-gradient(180deg, rgba(0, 229, 255, 0.75), rgba(123, 45, 255, 0.35)); animation: stagepulse 3s ease-in-out infinite; }
-.st-2 { background: linear-gradient(180deg, rgba(123, 45, 255, 0.8), rgba(255, 45, 149, 0.4)); animation: stagepulse 3s ease-in-out 0.5s infinite; }
-.st-3 { background: linear-gradient(180deg, rgba(255, 45, 149, 0.85), rgba(216, 255, 0, 0.45)); animation: stagepulse 3s ease-in-out 1s infinite; }
-@keyframes stagepulse {
-  0%, 100% { box-shadow: inset 0 0 0 transparent; }
-  50%      { box-shadow: inset 0 0 26px rgba(255, 255, 255, 0.5); }
-}
-.shimmer {
-  position: absolute; top: 0; bottom: 0; left: -30%;
-  width: 24%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  animation: shimmersweep 2.8s linear infinite;
-}
-@keyframes shimmersweep { to { transform: translateX(560%); } }
-
-/* ============================================================
    REF.03 ARKNIGHTS — 版式零件板
    ============================================================ */
 .gram-board {
@@ -392,6 +262,7 @@
 .synth-card {
   position: relative;
   border: 1px solid var(--line);
+  border-radius: var(--r-card);
   background:
     radial-gradient(120% 90% at 20% 0%, rgba(123, 45, 255, 0.22), transparent 60%),
     var(--bg-2);
@@ -484,13 +355,6 @@
 .rules-in li::first-letter { color: var(--acid); }
 .rules-out li { color: var(--dim); }
 .rules-out li::first-letter { color: var(--pink); }
-
-/* ============================================================
-   acid max 增强
-   ============================================================ */
-html.acid-max .art-holo-foil { animation-duration: 2.5s, 2.2s; }
-html.acid-max .shimmer { animation-duration: 1.1s; }
-html.acid-max .st-1, html.acid-max .st-2, html.acid-max .st-3 { animation-duration: 1.2s; }
 
 /* ============================================================
    responsive

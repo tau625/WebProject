@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="works.css">
 <noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
 </head>
@@ -52,6 +53,7 @@
       <span class="brand-name">酸性信号<em>ACID SIGNAL</em></span>
     </a>
     <nav class="nav-links" aria-label="页面导航">
+      <a href="works.html">作品 WORKS</a>
       <a href="#signal">信号 SIGNAL</a>
       <a href="#lineup">阵容 LINEUP</a>
       <a href="#specimen">标本 SPECIMEN</a>
@@ -310,6 +312,42 @@
       <p class="access-note">* 全场 18+ · 需身份证件 · 售出不退 · 本页为虚构活动的设计演示 FICTIONAL EVENT / DESIGN DEMO</p>
     </section>
 
+    <!-- SELECTED WORKS -->
+    <section class="works-preview" id="works">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 005 / SELECTED WORKS ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="作品精选">作品精选</span> <em>SELECTED</em></h2>
+        <p class="sec-en">酸性图形作品档案 —— 液态 / 铬 / 全息，点击查看细节</p>
+      </header>
+      <div class="mat-grid" data-works-featured="3"></div>
+      <div class="works-more" data-reveal>
+        <a class="btn btn-ghost magnetic" href="works.html">查看全部作品 ALL WORKS →</a>
+      </div>
+      <p class="works-preview-note">* 作品系统为数据驱动（works.js），持续扩充 —— 为艺术集展示站预留的档案结构</p>
+    </section>
+
+    <!-- ABOUT + CONTACT -->
+    <section class="about" id="about">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 006 / ABOUT + CONTACT ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="关于与联系">关于与联系</span> <em>ABOUT</em></h2>
+      </header>
+      <div class="about-grid">
+        <div class="about-copy" data-reveal>
+          <p>酸性信号是一场持续进行的视觉实验：把失真、液态金属、铬与噪声收进同一套语言里。这里既是虚构派对的现场档案，也是图形作品的展台。</p>
+          <p>接下来它会长成一座艺术集展示站 —— 作品档案、创作笔记（实验室）与现场计划共用同一套酸性语法。</p>
+        </div>
+        <div class="about-contact" data-reveal style="--d:1">
+          <ul>
+            <li><span class="k">邮件 EMAIL</span> <a href="mailto:hello@acid-signal.example">hello@acid-signal.example</a></li>
+            <li><span class="k">合作 WORK</span> <a href="works.html">作品与授权 →</a></li>
+            <li><span class="k">笔记 NOTES</span> <a href="lab.html">酸性实验室 →</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="about-note">* 联系邮箱为演示占位（.example 保留域）；作品均为 CSS / SVG 生成图形</p>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -329,5 +367,6 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="works.js"></script>
 </body>
 </html>

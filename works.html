@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>作品档案 WORKS ARCHIVE — 酸性信号</title>
+<meta name="description" content="酸性信号作品档案 —— 液态 / 铬 / 全息 / 故障 / 平面五个系列的酸性图形作品。数据驱动，可持续扩充。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="lab.css">
+<link rel="stylesheet" href="works.css">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+</head>
+<body class="works-page">
+
+  <!-- 全局特效层（与全站一致） -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-blob" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- SVG 滤镜与符号 -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="fx-liquid" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence id="turbA" type="fractalNoise" baseFrequency="0.012 0.026" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap id="dispA" in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="fx-soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence id="turbB" type="fractalNoise" baseFrequency="0.009 0.018" numOctaves="2" seed="21" result="n"/>
+        <feDisplacementMap id="dispB" in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <symbol id="sparkle" viewBox="0 0 24 24">
+        <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12C8 11 11 8 12 0Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 导航 -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">酸性信号<em>ACID SIGNAL</em></span>
+    </a>
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="works.html">作品 WORKS</a>
+      <a href="index.html#signal">信号 SIGNAL</a>
+      <a href="index.html#lineup">阵容 LINEUP</a>
+      <a href="index.html#specimen">标本 SPECIMEN</a>
+      <a href="index.html#access">门票 ACCESS</a>
+      <a href="lab.html">实验室 LAB</a>
+    </nav>
+    <div class="nav-act">
+      <button class="acid-toggle" id="acidToggle" type="button" aria-pressed="false">
+        <span class="dot" aria-hidden="true"></span>ACID MAX
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="lab-hero works-hero" id="top">
+      <div class="lab-deco" aria-hidden="true">
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <svg class="star star-1"><use href="#sparkle"/></svg>
+        <svg class="star star-3"><use href="#sparkle"/></svg>
+      </div>
+
+      <div class="hero-body">
+        <p class="hero-eyebrow" data-reveal>[ ARCHIVE 2026 ] 作品档案 — 数据驱动，可持续扩充</p>
+        <h1 class="hero-title" data-reveal style="--d:1">
+          <span class="t-cn chrome distort">作品档案</span>
+          <span class="t-en"><span class="outline">WORKS</span> ARCHIVE</span>
+        </h1>
+        <p class="hero-sub" data-reveal style="--d:2">
+          五个系列的酸性图形作品：液态 / 铬 / 全息 / 故障 / 平面。点开任意一件查看细节。<br>
+          <span class="en" data-wave>CLICK ANY WORK FOR THE FULL SPECIMEN.</span>
+        </p>
+      </div>
+
+      <div class="ticker">
+        <div class="track">
+          <span class="chunk">WORKS ARCHIVE ✶ 作品档案 ✶ 液态 / 铬 / 全息 / 故障 / 平面 ✶ ACID SIGNAL ✶&nbsp;</span>
+          <span class="chunk">WORKS ARCHIVE ✶ 作品档案 ✶ 液态 / 铬 / 全息 / 故障 / 平面 ✶ ACID SIGNAL ✶&nbsp;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS GRID -->
+    <section class="works-sec" id="archive">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 001 / ARCHIVE · <span data-works-count>08 WORKS</span> ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="全部作品">全部作品</span> <em>ALL WORKS</em></h2>
+      </header>
+      <div class="filter-bar" data-work-filters data-reveal role="group" aria-label="作品分类筛选"></div>
+      <div class="mat-grid" data-works-grid></div>
+    </section>
+  </main>
+
+  <!-- 作品详情灯箱 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品详情" hidden>
+    <div class="lb-backdrop" data-close></div>
+    <figure class="lb-card">
+      <button class="lb-close" type="button" data-close aria-label="关闭详情">✕</button>
+      <button class="lb-nav lb-prev" type="button" aria-label="上一件作品">←</button>
+      <button class="lb-nav lb-next" type="button" aria-label="下一件作品">→</button>
+      <div class="lb-art" aria-hidden="true"></div>
+      <figcaption class="lb-meta">
+        <span class="lb-no"></span>
+        <h3 class="lb-title"></h3>
+        <p class="lb-en"></p>
+        <p class="lb-desc"></p>
+        <ul class="lb-tags"></ul>
+        <p class="lb-medium"></p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="ticker ticker-xl">
+      <div class="track">
+        <span class="chunk outline">WORKS ARCHIVE — 作品档案 — 持续扩充中 —&nbsp;</span>
+        <span class="chunk outline">WORKS ARCHIVE — 作品档案 — 持续扩充中 —&nbsp;</span>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p class="footer-credit" data-wave>ARCHIVE IN PROGRESS</p>
+      <p class="fine">作品均为 CSS / SVG 生成图形 · 收藏与授权请通过首页联系 · © 2026 ACID SIGNAL</p>
+      <a class="to-top" href="index.html">← 返回首页 HOME</a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="works.js"></script>
+</body>
+</html>

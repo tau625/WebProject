@@ -19,7 +19,150 @@
   --cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
   --grain-op: 0.085;
   --marq-dur: 26s;
+  --r-card: 30px 6px 30px 6px;
 }
+
+/* ============================================================
+   共享组件层：作品 / 材质卡（全站复用，艺术集骨架的卡片系统）
+   ============================================================ */
+.work-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.work-card:hover { border-color: var(--acid); }
+
+.mat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  max-width: 1440px;
+  margin-inline: auto;
+}
+.mat-card {
+  --glow: var(--acid);
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--bg-2);
+  transition: transform 0.2s ease-out, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 transparent;
+}
+.mat-card:nth-child(1) { --glow: var(--pink); }
+.mat-card:nth-child(2) { --glow: var(--cyan); }
+.mat-card:nth-child(3) { --glow: var(--acid); }
+.mat-card:hover {
+  border-color: var(--glow);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--glow) 30%, transparent);
+}
+/* 角标框 */
+.mat-card::before, .mat-card::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 2px solid var(--glow);
+  pointer-events: none;
+}
+.mat-card::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+.mat-card::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+.mat-art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.mat-meta { padding: 20px clamp(18px, 2vw, 26px) 26px; }
+.mat-idx {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--glow);
+}
+.mat-name {
+  font-family: var(--cn);
+  font-weight: 900;
+  font-size: 23px;
+  letter-spacing: 0.03em;
+  margin: 10px 0 8px;
+}
+.mat-name em {
+  font-family: var(--mono);
+  font-style: normal; font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--dim);
+  margin-left: 8px;
+}
+.mat-cite { font-size: 13px; color: var(--dim); min-height: 3.2em; }
+.mat-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--glow);
+  border: 1px solid color-mix(in srgb, var(--glow) 55%, transparent);
+  padding: 6px 12px;
+}
+
+/* 材质词汇：全息箔 / 液态铬 / 反应式 */
+.art-holo-foil {
+  background: linear-gradient(115deg, #ff2d95, #7b2dff, #00e5ff, #d8ff00, #ff2d95);
+  background-size: 320% 320%;
+  animation: holo 6s linear infinite, angleshift 5s ease-in-out infinite;
+}
+@keyframes angleshift { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(42deg); } }
+.sheen {
+  position: absolute; inset: -30%;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.8) 50%, transparent 58%);
+  mix-blend-mode: screen;
+  animation: sheenpass 4.2s ease-in-out infinite;
+}
+@keyframes sheenpass {
+  0%, 100% { transform: translateX(-42%) rotate(6deg); }
+  50%      { transform: translateX(42%) rotate(6deg); }
+}
+
+.art-liquid-chrome { background: radial-gradient(120% 120% at 70% 20%, rgba(0, 229, 255, 0.16), transparent 55%), var(--bg-2); }
+.art-liquid-chrome .chrome-orb {
+  width: 58%;
+  animation: blob 8s ease-in-out infinite;
+}
+
+.art-reactive { display: flex; gap: 10px; padding: 18px; }
+.stage {
+  position: relative;
+  flex: 1;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.stage i {
+  position: absolute; left: 8px; bottom: 8px;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+.st-1 { background: linear-gradient(180deg, rgba(0, 229, 255, 0.75), rgba(123, 45, 255, 0.35)); animation: stagepulse 3s ease-in-out infinite; }
+.st-2 { background: linear-gradient(180deg, rgba(123, 45, 255, 0.8), rgba(255, 45, 149, 0.4)); animation: stagepulse 3s ease-in-out 0.5s infinite; }
+.st-3 { background: linear-gradient(180deg, rgba(255, 45, 149, 0.85), rgba(216, 255, 0, 0.45)); animation: stagepulse 3s ease-in-out 1s infinite; }
+@keyframes stagepulse {
+  0%, 100% { box-shadow: inset 0 0 0 transparent; }
+  50%      { box-shadow: inset 0 0 26px rgba(255, 255, 255, 0.5); }
+}
+.shimmer {
+  position: absolute; top: 0; bottom: 0; left: -30%;
+  width: 24%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  animation: shimmersweep 2.8s linear infinite;
+}
+@keyframes shimmersweep { to { transform: translateX(560%); } }
+
+html.acid-max .art-holo-foil { animation-duration: 2.5s, 2.2s; }
+html.acid-max .shimmer { animation-duration: 1.1s; }
+html.acid-max .st-1, html.acid-max .st-2, html.acid-max .st-3 { animation-duration: 1.2s; }
 html.acid-max {
   --grain-op: 0.17;
   --marq-dur: 11s;
@@ -718,7 +861,7 @@ main section {
 .spec {
   position: relative;
   border: 1px solid var(--line);
-  border-radius: 30px 6px 30px 6px;
+  border-radius: var(--r-card);
   background: var(--bg-2);
   overflow: hidden;
   transition: transform 0.2s ease-out, border-color 0.3s;
@@ -858,6 +1001,7 @@ main section {
   display: flex; flex-direction: column;
   gap: 18px;
   border: 1px solid var(--line);
+  border-radius: var(--r-card);
   padding: clamp(24px, 3vw, 36px);
   background: rgba(14, 14, 21, 0.6);
   transition: transform 0.3s, border-color 0.3s;
@@ -959,7 +1103,9 @@ html.acid-max .glitch-stack { animation: shake 0.18s steps(2) infinite; }
   html { scroll-padding-top: 124px; }
   .nav { flex-wrap: wrap; row-gap: 4px; }
   .nav-links { order: 3; width: 100%; padding-bottom: 2px; }
-  .nav-links a { font-size: 10px; letter-spacing: 0.1em; padding: 4px 2px; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.1em; padding: 13px 8px; }
+  .acid-toggle { padding: 11px 14px; }
+  .brand { padding-block: 7px; }
   .sticker { display: none; }
   .act { grid-template-columns: 64px 1fr; gap: 14px; }
   .act-meta { grid-column: 2; }
