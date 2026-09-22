@@ -114,12 +114,17 @@ window.AcidWorks = (() => {
     });
   }
 
-  function openLightbox(idOrIndex) {
+  // id → 档案下标：外部字符串（hash / data-work）在此被白名单查表消化为数字
+  function resolveIndex(idOrIndex) {
+    if (typeof idOrIndex === 'number') return (Number.isInteger(idOrIndex) && idOrIndex >= 0 && idOrIndex < WORKS.length) ? idOrIndex : -1;
+    if (typeof idOrIndex === 'string') return WORKS.findIndex((w) => w.id === idOrIndex);
+    return -1;
+  }
+
+  function openLightbox(index) {
     if (!lb) return;
-    // 严格白名单：id 必须真实存在于档案中，否则直接返回（阻断 location.hash → 渲染 的污点链）
-    let i = typeof idOrIndex === 'number' ? idOrIndex : -1;
-    if (typeof idOrIndex === 'string') i = WORKS.findIndex((w) => w.id === idOrIndex);
-    if (!(i >= 0 && i < WORKS.length)) return;
+    const i = resolveIndex(index); // 只接受档案下标；渲染内容全部来自静态 WORKS
+    if (i < 0) return;
     lastFocus = document.activeElement;
     fillLightbox(i);
     lb.hidden = false;
@@ -148,7 +153,8 @@ window.AcidWorks = (() => {
       card.addEventListener('click', (e) => {
         if (!lb) return; // 首页无灯箱时保留原生跳转
         e.preventDefault();
-        openLightbox(card.getAttribute('data-work'));
+        const idx = resolveIndex(card.getAttribute('data-work'));
+        if (idx >= 0) openLightbox(idx);
       });
     });
   }
@@ -202,12 +208,13 @@ window.AcidWorks = (() => {
         else if (e.key === 'ArrowLeft') step(-1);
         else if (e.key === 'ArrowRight') step(1);
       });
-      const m = (location.hash || '').match(/^#(w\d+)$/);
-      if (m) openLightbox(m[1]); // 正则白名单 + 档案白名单双重校验
-      window.addEventListener('hashchange', () => {
-        const mm = (location.hash || '').match(/^#(w\d+)$/);
-        if (mm) openLightbox(mm[1]);
-      });
+      const openFromHash = () => {
+        const m = (location.hash || '').match(/^#(w\d+)$/);
+        const idx = m ? WORKS.findIndex((w) => w.id === m[1]) : -1;
+        if (idx >= 0) openLightbox(idx); // 外部字符串只做查表，不进入渲染链路
+      };
+      openFromHash();
+      window.addEventListener('hashchange', openFromHash);
     }
   }
 
