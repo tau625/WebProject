@@ -80,6 +80,10 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
   doc.querySelectorAll('[data-reveal]').forEach((el) => revealIO.observe(el));
+  // 兜底：IO 不投递（后台/冻结标签页、老浏览器）时直接显示，避免内容永久透明
+  setTimeout(() => {
+    doc.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => el.classList.add('in'));
+  }, 2500);
 
   /* ---------- custom cursor ---------- */
   const dot = doc.querySelector('.cursor-dot');
@@ -149,21 +153,11 @@
   const dispB = doc.getElementById('dispB');
 
   if (!reduced && turbA && turbB && dispA && dispB) {
-    // 只在有扭曲元素可见时重绘滤镜，节省性能
-    const visible = new Set();
-    const fxIO = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) visible.add(en.target);
-        else visible.delete(en.target);
-      });
-    }, { rootMargin: '12% 0px' });
-    doc.querySelectorAll('.distort, .distort-soft, .liquid-blob').forEach((el) => fxIO.observe(el));
-
     let t = 0;
     let last = 0;
     (function fxLoop(now) {
       requestAnimationFrame(fxLoop);
-      if (!visible.size || now - last < 70) return;
+      if (now - last < 70) return;
       last = now;
       t += 0.06;
       const boost = root.classList.contains('acid-max') ? 1.9 : 1;

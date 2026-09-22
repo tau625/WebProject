@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACID LAB · 三源参考合成方案 — 酸性信号</title>
+<meta name="description" content="酸性实验室 REF.SYNTH 001 —— Marathon 平面、Apex 皮肤材质、明日方舟版式语法，全部翻译成一种酸性语言。独立分页，不影响首页。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="lab.css">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+</head>
+<body class="lab-page">
+
+  <!-- 全局特效层（与首页一致） -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-blob" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- SVG 滤镜与符号 -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="fx-liquid" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence id="turbA" type="fractalNoise" baseFrequency="0.012 0.026" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap id="dispA" in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="fx-soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence id="turbB" type="fractalNoise" baseFrequency="0.009 0.018" numOctaves="2" seed="21" result="n"/>
+        <feDisplacementMap id="dispB" in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <symbol id="sparkle" viewBox="0 0 24 24">
+        <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12C8 11 11 8 12 0Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 导航 -->
+  <header class="nav lab-nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">酸性实验室<em>ACID LAB</em></span>
+    </a>
+    <nav class="nav-links" aria-label="实验页导航">
+      <a href="#ref01">01 MARATHON</a>
+      <a href="#ref02">02 APEX</a>
+      <a href="#ref03">03 ARKNIGHTS</a>
+      <a href="#synth">SYNTH 合成</a>
+    </nav>
+    <div class="nav-act">
+      <a class="lab-back" href="index.html">← 返回首页</a>
+      <button class="acid-toggle" id="acidToggle" type="button" aria-pressed="false">
+        <span class="dot" aria-hidden="true"></span>ACID MAX
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="lab-hero" id="top">
+      <div class="lab-deco" aria-hidden="true">
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <svg class="star star-1"><use href="#sparkle"/></svg>
+        <svg class="star star-3"><use href="#sparkle"/></svg>
+      </div>
+
+      <div class="hero-body">
+        <p class="hero-eyebrow" data-reveal>[ REF.SYNTH 001 ] 三源参考合成方案 — 一个分页，一种语言</p>
+        <h1 class="hero-title" data-reveal style="--d:1">
+          <span class="t-cn chrome distort">酸性实验室</span>
+          <span class="t-en"><span class="outline">ACID</span> LAB</span>
+        </h1>
+        <p class="hero-sub" data-reveal style="--d:2">
+          三个参考源 × 一种酸性语言。吸收，不混搭 —— 所有借鉴都必须翻译成酸性设计。<br>
+          <span class="en" data-wave>ABSORB. TRANSLATE. DO NOT MIX.</span>
+        </p>
+        <ul class="hero-chips" data-reveal style="--d:3">
+          <li>REF.01 MARATHON</li>
+          <li>REF.02 APEX SKINS</li>
+          <li>REF.03 ARKNIGHTS</li>
+          <li>独立分页 · 首页零改动</li>
+        </ul>
+      </div>
+
+      <div class="ticker">
+        <div class="track">
+          <span class="chunk">SALVAGE ✶ RECOVER ✶ EXTRACT ✶ 搜 打 撤 ✶ REF.SYNTH 001 ✶ ABSORB DON'T MIX ✶&nbsp;</span>
+          <span class="chunk">SALVAGE ✶ RECOVER ✶ EXTRACT ✶ 搜 打 撤 ✶ REF.SYNTH 001 ✶ ABSORB DON'T MIX ✶&nbsp;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- REF.01 MARATHON -->
+    <section class="lab-sec ref-mara" id="ref01">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ REF.01 / SOURCE: MARATHON — BUNGIE ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="平面酸性">平面酸性</span> <em>FLAT ACID</em></h2>
+        <p class="sec-en">谱系：90s acid graphics 海报传统 · 官网色板与字体实测 · 只取平面语言</p>
+      </header>
+
+      <div class="mara-poster" data-reveal>
+        <div class="mp-top">
+          <span class="mp-tag">UESC ✶ ACID SIGNAL DIVISION</span>
+          <span class="mp-barcode" aria-hidden="true"></span>
+        </div>
+        <div class="mp-body">
+          <div class="mp-cn" aria-label="搜打撤">
+            <span class="mp-block b-green">搜</span>
+            <span class="mp-block b-red">打</span>
+            <span class="mp-block b-dark">撤</span>
+          </div>
+          <div class="mp-en">
+            <span class="mp-word w-fill">SALVAGE</span>
+            <span class="mp-word w-outline distort-soft">RECOVER</span>
+            <span class="mp-word w-fill">EXTRACT</span>
+          </div>
+          <div class="mp-shapes" aria-hidden="true">
+            <span class="mp-circle"></span>
+            <svg class="mp-star"><use href="#sparkle"/></svg>
+            <span class="mp-sticker">
+              <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="21"/>
+                <path class="face" d="M13 16l7 7m0-7l-7 7M28 16l7 7m0-7l-7 7M14 32c3.5 4 16.5 4 20 0"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <p class="mp-quotes">「POWERFUL. CONFIGURABLE. EXPENDABLE.」 · 「A GRAVEYARD OF POSSIBILITIES」 —— Marathon 官方标语，仅作风格引用</p>
+        <div class="mp-foot">
+          <span class="mp-tag">RUNNERS / C.A.R.R.I. / MIDNIGHT DECAY</span>
+          <span class="mp-barcode" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <ul class="hero-chips" data-reveal>
+        <li>扁平撞色面</li>
+        <li>超大宽体标题</li>
+        <li>全大写标语</li>
+        <li>贴纸错位拼贴</li>
+        <li>颗粒噪点</li>
+      </ul>
+      <p class="lineup-note" data-reveal>* 字体替换：Shapiro Wide → Unbounded 900 · PP Fraktion Mono / TT Interphases Pro → Space Mono。官方色板 #c0fe04 / #f24723 / #1c1c1c 仅用于本参考卡。图形均为自制，不复用 Runner 等官方标志。</p>
+    </section>
+
+    <!-- REF.02 APEX SKINS -->
+    <section class="lab-sec ref-apex" id="ref02">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ REF.02 / SOURCE: APEX LEGENDS — 皮肤材质 ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="材质库">材质库</span> <em>MATERIALS</em></h2>
+        <p class="sec-en">只取材质学：全息箔 / 液态铬 / 反应式动态 —— 写实枪械感与科幻装饰不搬</p>
+      </header>
+
+      <div class="mat-grid">
+        <article class="mat-card tilt" data-reveal>
+          <div class="mat-art art-holo-foil" aria-hidden="true"><i class="sheen"></i></div>
+          <div class="mat-meta">
+            <span class="mat-idx">SKIN.001</span>
+            <h3 class="mat-name">全息箔 <em>HOLO FOIL</em></h3>
+            <p class="mat-cite">对标 Alternator「Obsidian Chameleon」角度变色 · Legendary Holospray 动态全息</p>
+            <span class="mat-tag">传奇 / 角度变色</span>
+          </div>
+        </article>
+
+        <article class="mat-card tilt" data-reveal style="--d:1">
+          <div class="mat-art art-liquid-chrome" aria-hidden="true">
+            <div class="chrome-orb"><i class="shine"></i></div>
+          </div>
+          <div class="mat-meta">
+            <span class="mat-idx">SKIN.002</span>
+            <h3 class="mat-name">液态铬 <em>LIQUID CHROME</em></h3>
+            <p class="mat-cite">对标 VK-47 Flatline「Heavy Metal」· Prowler「Liquid Cooled」液态金属</p>
+            <span class="mat-tag">传奇 / 流动金属</span>
+          </div>
+        </article>
+
+        <article class="mat-card tilt" data-reveal style="--d:2">
+          <div class="mat-art art-reactive" aria-hidden="true">
+            <span class="stage st-1"><i>STG.01</i></span>
+            <span class="stage st-2"><i>STG.02</i></span>
+            <span class="stage st-3"><i>STG.03</i></span>
+            <i class="shimmer"></i>
+          </div>
+          <div class="mat-meta">
+            <span class="mat-idx">SKIN.003</span>
+            <h3 class="mat-name">反应式 <em>REACTIVE</em></h3>
+            <p class="mat-cite">对标 Reactive 三阶段进化：HAVOC「The Silver Storm → The Golden Idol」</p>
+            <span class="mat-tag">反应式 / 三阶段</span>
+          </div>
+        </article>
+      </div>
+
+      <ul class="hero-chips" data-reveal>
+        <li>shimmer 扫光</li>
+        <li>glowing edge 边缘辉光</li>
+        <li>animated-evolving 动态进化</li>
+        <li>particles 粒子</li>
+        <li>digital screen 数字屏</li>
+      </ul>
+      <p class="lineup-note" data-reveal>* 卡框语法对标 Banner Frame 稀有度递进，已换成酸性色框。酸性锚点：Wraith 皮肤「Acid Wraith」(Iconic)。</p>
+    </section>
+
+    <!-- REF.03 ARKNIGHTS -->
+    <section class="lab-sec ref-ark" id="ref03">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ REF.03 / SOURCE: 明日方舟 — KV 与 UI 体系 ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="版式语法">版式语法</span> <em>LAYOUT GRAMMAR</em></h2>
+        <p class="sec-en">只取版式零件：斜切 / 危险条纹 / 网点 / 竖排 / 编号 / 角标 —— 军绿与拟真 UI 不搬</p>
+      </header>
+
+      <div class="gram-board" data-reveal>
+        <span class="gb-cross c-tl" aria-hidden="true"></span>
+        <span class="gb-cross c-tr" aria-hidden="true"></span>
+        <span class="gb-cross c-bl" aria-hidden="true"></span>
+        <span class="gb-cross c-br" aria-hidden="true"></span>
+        <div class="gb-slant"><div class="gb-halftone"></div></div>
+        <div class="gb-hazard" aria-hidden="true"></div>
+        <p class="gb-note">REF.SYNTH 001 · 三源归一 · ACID ONLY</p>
+        <div class="gb-chamfer">切角 CHAMFER</div>
+        <ol class="gb-index">
+          <li><span>01</span>斜切分割 SLANT SPLIT</li>
+          <li><span>02</span>危险条纹 HAZARD STRIPE</li>
+          <li><span>03</span>网点 HALFTONE</li>
+          <li><span>04</span>竖排注记 VERTICAL NOTE</li>
+          <li><span>05</span>编号索引 INDEX NO.</li>
+          <li><span>06</span>角标框 CORNER BRACKET</li>
+          <li><span>07</span>对位十字 REG. MARK</li>
+          <li><span>08</span>切角 CHAMFER</li>
+        </ol>
+        <div class="gb-glyphs" aria-hidden="true">
+          <svg viewBox="0 0 264 24">
+            <g class="gl">
+              <path d="M2 2h16v4h-8v16H2zM22 22V8h6V2h8v20zM46 2h12v6h-6v6h8v8H46z"/>
+              <path d="M74 2h18v4h-6v16h-6V6h-6zM102 22L112 2h6l10 20h-7l-2-5h-8l-2 5zm11-10h4l-2-6z"/>
+              <path d="M136 2h6v20h-6zM148 2h20v5h-7v15h-6V7h-7zM176 2h8l4 8 4-8h8v20h-6V11l-6 11-6-11v11h-6z"/>
+              <path d="M208 2h20v5h-7v15h-6V7h-7zM236 22V2h6v7h8v5h-8v8h10v2z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <ul class="hero-chips" data-reveal>
+        <li>斜切分割</li>
+        <li>危险条纹</li>
+        <li>网点</li>
+        <li>竖排注记</li>
+        <li>编号索引</li>
+        <li>角标框</li>
+      </ul>
+      <p class="lineup-note" data-reveal>* 引用锚点：音律联觉 Ambience Synesthesia（「愚夜密函」WANTED · "Catch me if you can."）· IS3「水月与深蓝之树」倒置 / 镜像 / 常规三式架空排印 · IS6「岁的界园志异」八角与粉青撞色 ·「除夕」大字 + 拼音注记。架空字形条为自制装饰。</p>
+    </section>
+
+    <!-- SYNTHESIS -->
+    <section class="lab-sec ref-synth" id="synth">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ REF.SYNTH / 三源归一 ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="合成样式">合成样式</span> <em>THE SYNTHESIS</em></h2>
+        <p class="sec-en">面来自 REF.01 · 材质来自 REF.02 · 语法来自 REF.03 · 语言只有一个：酸性</p>
+      </header>
+
+      <div class="synth-wrap">
+        <div class="synth-card" data-reveal>
+          <div class="sy-hazard" aria-hidden="true"></div>
+          <span class="gb-cross c-tl" aria-hidden="true"></span>
+          <span class="gb-cross c-tr" aria-hidden="true"></span>
+          <span class="gb-cross c-bl" aria-hidden="true"></span>
+          <span class="gb-cross c-br" aria-hidden="true"></span>
+          <p class="sy-vnote">REF.SYNTH 001 · 三源归一 · ACID SIGNAL</p>
+          <div class="sy-slash" aria-hidden="true"><div class="gb-halftone"></div></div>
+          <div class="sy-main">
+            <h3 class="sy-title"><span class="chrome distort">酸性信号</span></h3>
+            <p class="sy-en"><span class="outline">ACID</span> SIGNAL</p>
+            <div class="sy-strip" aria-hidden="true"><i class="sheen"></i></div>
+          </div>
+          <div class="sy-foot">
+            <span class="mp-barcode" aria-hidden="true"></span>
+            <span class="mp-tag">SPECIMEN 001 / 01</span>
+          </div>
+        </div>
+
+        <div class="synth-rules" data-reveal style="--d:1">
+          <h3 class="rules-title">约束 <em>CONSTRAINTS</em></h3>
+          <ul class="rules-in">
+            <li>✓ 液态扭曲 + 铬 / 全息材质</li>
+            <li>✓ 酸绿 · 品红 · 青 · 紫撞色</li>
+            <li>✓ 颗粒 / 扫描线质感层</li>
+            <li>✓ 等宽技术注记与编号索引</li>
+            <li>✓ 扁平色块 + 贴纸错位拼贴</li>
+          </ul>
+          <ul class="rules-out">
+            <li>✕ 军事 HUD 拟真</li>
+            <li>✕ 写实枪械材质</li>
+            <li>✕ 科幻玻璃拟态</li>
+            <li>✕ 多风格并置混搭</li>
+          </ul>
+          <p class="lineup-note">* 色板纪律：Marathon 奶油底与橙红仅限 REF.01 参考卡内部；合成样式回归核心色板（酸绿 / 品红 / 青 / 紫 + 近黑 + 铬）。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="ticker ticker-xl">
+      <div class="track">
+        <span class="chunk outline">ACID LAB — REF.SYNTH 001 — 吸收，不混搭 —&nbsp;</span>
+        <span class="chunk outline">ACID LAB — REF.SYNTH 001 — 吸收，不混搭 —&nbsp;</span>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p class="footer-credit" data-wave>ABSORB DON'T MIX</p>
+      <p class="fine">参考来源：Marathon (Bungie) · Apex Legends · 明日方舟 —— 仅作风格研究引用 · © 2026 ACID SIGNAL</p>
+      <a class="to-top" href="index.html">← 返回首页 HOME</a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -19,6 +19,7 @@ python -m http.server 8123
 | `index.html` | 页面结构与文案（中英混排）、SVG 液态滤镜与图形符号 |
 | `style.css` | 全部视觉：铬金属渐变、液态 blob、全息、glitch、噪点/扫描线、跑马灯、响应式 |
 | `main.js` | 交互：液态扭曲动画、3D 倾斜卡片、磁吸按钮、自定义光标、滚动入场、ACID MAX 开关、toast |
+| `lab.html` + `lab.css` | 独立分页「酸性实验室」：Marathon 平面 / Apex 皮肤材质 / 明日方舟版式语法的三源参考合成方案（REF.SYNTH 001），首页风格零改动 |
 | `gui-test-screenshots/` | GUI 测试截图存证（修复前后） |
 
 ## 酸性设计要素
