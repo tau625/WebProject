@@ -30,7 +30,9 @@ window.AcidWorks = (() => {
   const GLYPH = { w05: '撤', w08: '✦', w06: '06' };
 
   // —— 图形语言渲染（全部复用站内酸性材质词汇）——
+  const ART_KINDS = ['liquid', 'chrome', 'holo', 'glitch', 'flat', 'halftone', 'reactive', 'sticker'];
   function artMarkup(kind, id) {
+    if (ART_KINDS.indexOf(kind) < 0) kind = 'liquid';
     switch (kind) {
       case 'liquid':
         return '<div class="wa wa-liquid"><div class="liquid-blob"></div></div>';
@@ -104,13 +106,20 @@ window.AcidWorks = (() => {
     lbEn.textContent = w.titleEn;
     lbDesc.textContent = w.desc;
     lbMedium.textContent = w.medium;
-    lbTags.innerHTML = w.tags.map((t) => '<li>' + tagLabel(t) + '</li>').join('');
+    lbTags.textContent = '';
+    w.tags.forEach((t) => {
+      const li = document.createElement('li');
+      li.textContent = tagLabel(t);
+      lbTags.appendChild(li);
+    });
   }
 
   function openLightbox(idOrIndex) {
     if (!lb) return;
-    let i = typeof idOrIndex === 'number' ? idOrIndex : WORKS.findIndex((w) => w.id === idOrIndex);
-    if (i < 0) i = 0;
+    // 严格白名单：id 必须真实存在于档案中，否则直接返回（阻断 location.hash → 渲染 的污点链）
+    let i = typeof idOrIndex === 'number' ? idOrIndex : -1;
+    if (typeof idOrIndex === 'string') i = WORKS.findIndex((w) => w.id === idOrIndex);
+    if (!(i >= 0 && i < WORKS.length)) return;
     lastFocus = document.activeElement;
     fillLightbox(i);
     lb.hidden = false;
@@ -194,7 +203,7 @@ window.AcidWorks = (() => {
         else if (e.key === 'ArrowRight') step(1);
       });
       const m = (location.hash || '').match(/^#(w\d+)$/);
-      if (m) openLightbox(m[1]);
+      if (m) openLightbox(m[1]); // 正则白名单 + 档案白名单双重校验
       window.addEventListener('hashchange', () => {
         const mm = (location.hash || '').match(/^#(w\d+)$/);
         if (mm) openLightbox(mm[1]);
