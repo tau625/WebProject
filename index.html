@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>酸性信号 ACID SIGNAL — VOL.03 视听实验现场</title>
+<meta name="description" content="酸性信号 ACID SIGNAL VOL.03 — 一场关于失真、液态金属与低频的夜间视听实验。2026.11.11 上海 · 地下 B2。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- 开机画面 -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-blob"></div>
+    <p class="boot-text">SIGNAL ACQUIRING<span class="boot-dots">...</span></p>
+  </div>
+
+  <!-- 全局特效层 -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-blob" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- SVG 滤镜与符号 -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="fx-liquid" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence id="turbA" type="fractalNoise" baseFrequency="0.012 0.026" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap id="dispA" in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="fx-soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence id="turbB" type="fractalNoise" baseFrequency="0.009 0.018" numOctaves="2" seed="21" result="n"/>
+        <feDisplacementMap id="dispB" in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <symbol id="sparkle" viewBox="0 0 24 24">
+        <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12C8 11 11 8 12 0Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 导航 -->
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">酸性信号<em>ACID SIGNAL</em></span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#signal">信号 SIGNAL</a>
+      <a href="#lineup">阵容 LINEUP</a>
+      <a href="#specimen">标本 SPECIMEN</a>
+      <a href="#access">门票 ACCESS</a>
+    </nav>
+    <div class="nav-act">
+      <button class="acid-toggle" id="acidToggle" type="button" aria-pressed="false">
+        <span class="dot" aria-hidden="true"></span>ACID MAX
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-deco" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <div class="orb"></div>
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <svg class="star star-1"><use href="#sparkle"/></svg>
+        <svg class="star star-2"><use href="#sparkle"/></svg>
+        <svg class="star star-3"><use href="#sparkle"/></svg>
+        <svg class="sticker" viewBox="0 0 200 200">
+          <defs>
+            <path id="circ" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/>
+          </defs>
+          <circle class="sticker-ring" cx="100" cy="100" r="52"/>
+          <text class="sticker-text"><textPath href="#circ">ACID SIGNAL ★ VOL.03 ★ 视听实验现场 ★ DISTORT THE SOUND ★</textPath></text>
+          <text class="sticker-core" x="100" y="108" text-anchor="middle">✕</text>
+        </svg>
+      </div>
+
+      <div class="hero-top">
+        <div class="ticker">
+          <div class="track">
+            <span class="chunk">酸性信号 ACID SIGNAL VOL.03 ★ 2026.11.11 SAT ★ 上海 · 地下 B2 ★ DISTORT THE SOUND ★ MELT THE IMAGE ★ 视听实验现场 ★&nbsp;</span>
+            <span class="chunk">酸性信号 ACID SIGNAL VOL.03 ★ 2026.11.11 SAT ★ 上海 · 地下 B2 ★ DISTORT THE SOUND ★ MELT THE IMAGE ★ 视听实验现场 ★&nbsp;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <p class="hero-eyebrow" data-reveal>[ VOL.03 ] 视听实验现场 — AUDIOVISUAL EXPERIMENT</p>
+        <h1 class="hero-title" data-reveal style="--d:1">
+          <span class="t-cn chrome distort">酸性信号</span>
+          <span class="t-en"><span class="outline">ACID</span> SIGNAL</span>
+        </h1>
+        <p class="hero-sub" data-reveal style="--d:2">
+          把声音调到失真，让画面开始融化。<br>
+          <span class="en" data-wave>DISTORT THE SOUND. MELT THE IMAGE.</span>
+        </p>
+        <ul class="hero-chips" data-reveal style="--d:3">
+          <li>2026.11.11 SAT</li>
+          <li>22:00 — 06:00</li>
+          <li>上海 · 地下 B2</li>
+          <li>18+</li>
+        </ul>
+        <div class="hero-cta" data-reveal style="--d:4">
+          <a class="btn btn-solid magnetic" href="#access">获取门票 GET ACCESS</a>
+          <a class="btn btn-ghost magnetic" href="#lineup">查看阵容 VIEW LINEUP</a>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <span class="scroll-hint">SCROLL ↓ 向下滚动</span>
+        <div class="ticker ticker-rev ticker-xl">
+          <div class="track">
+            <span class="chunk outline">失真 DISTORTION ✶ 液态 LIQUID ✶ 噪声 NOISE ✶ 铬 CHROME ✶&nbsp;</span>
+            <span class="chunk outline">失真 DISTORTION ✶ 液态 LIQUID ✶ 噪声 NOISE ✶ 铬 CHROME ✶&nbsp;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="signal">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 001 / MANIFESTO ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="信号说明">信号说明</span> <em>SIGNAL</em></h2>
+      </header>
+
+      <div data-reveal>
+        <p class="manifesto-lead distort-soft">六个小时，B2 的空气会变稠 —— 低频让墙面起皱，投影在皮肤上流动。这是一场把感官泡进<span class="hl">噪声</span>里的夜间实验。</p>
+      </div>
+
+      <ol class="principles">
+        <li data-reveal style="--d:1">
+          <span class="pr-idx">01</span>
+          <h3 class="pr-name">失真 <em>DISTORTION</em></h3>
+          <p class="pr-copy">不追求干净的信号。削波、破音、拉伸 —— 误差本身就是情绪。</p>
+        </li>
+        <li data-reveal style="--d:2">
+          <span class="pr-idx">02</span>
+          <h3 class="pr-name">液态 <em>LIQUID</em></h3>
+          <p class="pr-copy">一切固态都可疑。让字体融化，让金属流动，让边界保持未干。</p>
+        </li>
+        <li data-reveal style="--d:3">
+          <span class="pr-idx">03</span>
+          <h3 class="pr-name">噪声 <em>NOISE</em></h3>
+          <p class="pr-copy">雪花点是我们的纹理库。随机不是错误，是配方。</p>
+        </li>
+        <li data-reveal style="--d:4">
+          <span class="pr-idx">04</span>
+          <h3 class="pr-name">铬 <em>CHROME</em></h3>
+          <p class="pr-copy">把九十年代的梦抛光到刺眼。反射里住着另一个舞池。</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- LINEUP -->
+    <section class="lineup" id="lineup">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 002 / LINEUP ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="阵容">阵容</span> <em>LINEUP</em></h2>
+      </header>
+
+      <div class="acts">
+        <a class="act" href="#access" data-reveal>
+          <span class="act-time">22:00</span>
+          <span class="act-name glitch" data-text="NULL SIGNAL">NULL SIGNAL</span>
+          <span class="act-meta">DJ / 开场</span>
+        </a>
+        <a class="act" href="#access" data-reveal style="--d:1">
+          <span class="act-time">23:00</span>
+          <span class="act-name glitch" data-text="VHS 织女">VHS 织女</span>
+          <span class="act-meta">AV LIVE</span>
+        </a>
+        <a class="act" href="#access" data-reveal style="--d:2">
+          <span class="act-time">00:30</span>
+          <span class="act-name glitch" data-text="MELT PROTOCOL">MELT PROTOCOL</span>
+          <span class="act-meta">LIVE</span>
+        </a>
+        <a class="act" href="#access" data-reveal style="--d:3">
+          <span class="act-time">02:00</span>
+          <span class="act-name glitch" data-text="酸性少年">酸性少年</span>
+          <span class="act-meta">DJ / ACIDBOY</span>
+        </a>
+        <a class="act" href="#access" data-reveal style="--d:4">
+          <span class="act-time">03:30</span>
+          <span class="act-name glitch" data-text="CHROME DOLL">CHROME DOLL</span>
+          <span class="act-meta">LIVE</span>
+        </a>
+        <a class="act" href="#access" data-reveal style="--d:5">
+          <span class="act-time">05:00</span>
+          <span class="act-name glitch" data-text="低频幽灵">低频幽灵</span>
+          <span class="act-meta">CLOSING / SUBGHOST</span>
+        </a>
+      </div>
+
+      <p class="lineup-note">* 21:30 开门 DOORS · 阵容与时刻以最终公告为准 · LINEUP SUBJECT TO CHANGE</p>
+    </section>
+
+    <!-- SPECIMENS -->
+    <section class="specs" id="specimen">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 003 / SPECIMENS ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="标本">标本</span> <em>SPECIMENS</em></h2>
+        <p class="sec-en">当晚出没的四种视觉物质 —— FOUR VISUAL SUBSTANCES</p>
+      </header>
+
+      <div class="spec-grid">
+        <article class="spec tilt" data-reveal>
+          <div class="spec-art art-liquid" aria-hidden="true"><div class="liquid-blob"></div></div>
+          <div class="spec-meta">
+            <span class="spec-idx">SPEC.001</span>
+            <h3 class="spec-name">液态 <em>LIQUID</em></h3>
+            <p class="spec-copy">会呼吸的轮廓。所有边缘都在犹豫要不要融化。</p>
+          </div>
+        </article>
+
+        <article class="spec tilt" data-reveal style="--d:1">
+          <div class="spec-art art-chrome" aria-hidden="true"><div class="chrome-orb"><i class="shine"></i></div></div>
+          <div class="spec-meta">
+            <span class="spec-idx">SPEC.002</span>
+            <h3 class="spec-name">铬球 <em>CHROME</em></h3>
+            <p class="spec-copy">抛光到刺眼的金属梦境，反射一整个舞池。</p>
+          </div>
+        </article>
+
+        <article class="spec tilt" data-reveal style="--d:2">
+          <div class="spec-art art-holo" aria-hidden="true"><div class="holo-panel"></div></div>
+          <div class="spec-meta">
+            <span class="spec-idx">SPEC.003</span>
+            <h3 class="spec-name">全息 <em>HOLO</em></h3>
+            <p class="spec-copy">在两种色相之间反复横跳，拒绝定格成一种颜色。</p>
+          </div>
+        </article>
+
+        <article class="spec tilt" data-reveal style="--d:3">
+          <div class="spec-art art-glitch" aria-hidden="true">
+            <div class="glitch-stack">
+              <span class="gs gs-r">ERROR 液化</span>
+              <span class="gs gs-c">ERROR 液化</span>
+              <span class="gs">ERROR 液化</span>
+            </div>
+          </div>
+          <div class="spec-meta">
+            <span class="spec-idx">SPEC.004</span>
+            <h3 class="spec-name">故障 <em>GLITCH</em></h3>
+            <p class="spec-copy">信号断裂的四毫秒，被我们放大成整个夜晚。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACCESS -->
+    <section class="access" id="access">
+      <header class="sec-head" data-reveal>
+        <p class="sec-idx">[ 004 / ACCESS ]</p>
+        <h2 class="sec-title"><span class="glitch" data-text="门票">门票</span> <em>ACCESS</em></h2>
+        <p class="sec-en">三档通行 —— CHOOSE YOUR NOISE</p>
+      </header>
+
+      <div class="tiers">
+        <article class="tier" data-reveal>
+          <p class="tier-name">早鸟 <em>EARLY BIRD</em></p>
+          <p class="tier-price"><span class="cur">¥</span>180</p>
+          <ul class="tier-list">
+            <li>全场通行 ALL ACCESS</li>
+            <li>含 1 杯饮品 ONE DRINK</li>
+            <li>限量 100 张</li>
+          </ul>
+          <button class="btn btn-ghost" type="button" data-toast="DEMO · 早鸟票登记已记录（虚构页面）">选择 SELECT</button>
+        </article>
+
+        <article class="tier tier-hot" data-reveal style="--d:1">
+          <span class="tier-flag">HOT</span>
+          <p class="tier-name">全价 <em>REGULAR</em></p>
+          <p class="tier-price"><span class="cur">¥</span>260</p>
+          <ul class="tier-list">
+            <li>全场通行 ALL ACCESS</li>
+            <li>含 1 杯饮品 ONE DRINK</li>
+            <li>现场取票 AT DOOR</li>
+          </ul>
+          <button class="btn btn-solid" type="button" data-toast="DEMO · 全价票登记已记录（虚构页面）">选择 SELECT</button>
+        </article>
+
+        <article class="tier" data-reveal style="--d:2">
+          <p class="tier-name">双人 <em>DUO</em></p>
+          <p class="tier-price"><span class="cur">¥</span>420</p>
+          <ul class="tier-list">
+            <li>两人同行 TWO GUESTS</li>
+            <li>含 2 杯饮品 TWO DRINKS</li>
+            <li>优先入场 FAST LANE</li>
+          </ul>
+          <button class="btn btn-ghost" type="button" data-toast="DEMO · 双人票登记已记录（虚构页面）">选择 SELECT</button>
+        </article>
+      </div>
+
+      <div class="access-cta" data-reveal>
+        <button class="btn btn-big magnetic" type="button" data-toast="已登记 · SEE YOU IN THE NOISE（演示）">立即登记 REGISTER NOW</button>
+      </div>
+      <p class="access-note">* 全场 18+ · 需身份证件 · 售出不退 · 本页为虚构活动的设计演示 FICTIONAL EVENT / DESIGN DEMO</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="ticker ticker-xl">
+      <div class="track">
+        <span class="chunk outline">ACID SIGNAL 酸性信号 — VOL.03 — SEE YOU IN THE NOISE —&nbsp;</span>
+        <span class="chunk outline">ACID SIGNAL 酸性信号 — VOL.03 — SEE YOU IN THE NOISE —&nbsp;</span>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p class="footer-credit" data-wave>MADE WITH NOISE &amp; CHROME</p>
+      <p class="fine">酸性设计风格演示 · 虚构活动 FICTIONAL EVENT · © 2026 ACID SIGNAL</p>
+      <a class="to-top" href="#top">回到顶部 ↑ TOP</a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
