@@ -8,14 +8,18 @@ window.AcidWorks = (() => {
   // tags 分类（液态·铬·全息·故障·平面）/ art 图形语言 / medium 材质说明
   // desc 作品描述 / featured 是否首页精选
   const WORKS = [
-    { id: 'w01', no: '001', title: '液态信号', titleEn: 'LIQUID SIGNAL', year: '2026', tags: ['liquid'], art: 'liquid', medium: 'CSS / SVG 生成图形', desc: '把一整套通讯信号倒进液态金属里。轮廓永远在犹豫要不要融化。', featured: true },
-    { id: 'w02', no: '002', title: '铬球', titleEn: 'CHROME ORB', year: '2026', tags: ['chrome'], art: 'chrome', medium: '锥形渐变 / 高光扫描', desc: '抛光到刺眼的金属梦境。反射里住着另一个舞池。', featured: true },
-    { id: 'w03', no: '003', title: '全息箔', titleEn: 'HOLO FOIL', year: '2026', tags: ['holo'], art: 'holo', medium: '全息渐变 / 角度变色', desc: '在两种色相之间反复横跳，拒绝定格成一种颜色。', featured: true },
-    { id: 'w04', no: '004', title: '液化错误', titleEn: 'ERROR MELTED', year: '2026', tags: ['glitch', 'liquid'], art: 'glitch', medium: 'RGB 分层 / 切片位移', desc: '信号断裂的四毫秒，被放大成一整张画面。错误即笔触。', featured: false },
-    { id: 'w05', no: '005', title: '搜打撤', titleEn: 'SEARCH LOOT EXTRACT', year: '2026', tags: ['flat'], art: 'flat', medium: '平色块 / 贴纸拼贴', desc: '三块色面，三个动作。扁平海报语言的酸性直译。', featured: false },
-    { id: 'w06', no: '006', title: '网点斜切', titleEn: 'HALFTONE SLANT', year: '2026', tags: ['flat'], art: 'halftone', medium: '网点 / 斜切 / 危险条纹', desc: '版式零件的再编排：网点遇上斜切，秩序里的失衡。', featured: false },
-    { id: 'w07', no: '007', title: '反应式三阶', titleEn: 'REACTIVE TRIAD', year: '2026', tags: ['chrome', 'holo'], art: 'reactive', medium: '三阶段渐变 / 扫光', desc: '一次关于进化材质的研究：从冷凝到熔解，三段渐变的推力。', featured: false },
-    { id: 'w08', no: '008', title: '星屑贴纸', titleEn: 'STELLAR STICKER', year: '2026', tags: ['flat', 'glitch'], art: 'sticker', medium: '贴纸 / 描边字 / 故障底纹', desc: '贴纸簿的一页。撕下来，贴在任何信号上。', featured: false }
+    { id: 'w01', no: '001', title: '液态信号', titleEn: 'LIQUID SIGNAL', year: '2026', tags: ['liquid'], art: 'liquid', series: '字形实验', medium: 'CSS / SVG 生成图形', desc: '把一整套通讯信号倒进液态金属里。轮廓永远在犹豫要不要融化。', featured: true },
+    { id: 'w02', no: '002', title: '铬球', titleEn: 'CHROME ORB', year: '2026', tags: ['chrome'], art: 'chrome', series: '材质研究', medium: '锥形渐变 / 高光扫描', desc: '抛光到刺眼的金属梦境。反射里住着另一个舞池。', featured: true },
+    { id: 'w03', no: '003', title: '全息箔', titleEn: 'HOLO FOIL', year: '2026', tags: ['holo'], art: 'holo', series: '材质研究', medium: '全息渐变 / 角度变色', desc: '在两种色相之间反复横跳，拒绝定格成一种颜色。', featured: true },
+    { id: 'w04', no: '004', title: '液化错误', titleEn: 'ERROR MELTED', year: '2026', tags: ['glitch', 'liquid'], art: 'glitch', series: '字形实验', medium: 'RGB 分层 / 切片位移', desc: '信号断裂的四毫秒，被放大成一整张画面。错误即笔触。', featured: false },
+    { id: 'w05', no: '005', title: '搜打撤', titleEn: 'SEARCH LOOT EXTRACT', year: '2026', tags: ['flat'], art: 'flat', series: '平面考古', medium: '平色块 / 贴纸拼贴', desc: '三块色面，三个动作。扁平海报语言的酸性直译。', featured: false },
+    { id: 'w06', no: '006', title: '网点斜切', titleEn: 'HALFTONE SLANT', year: '2026', tags: ['flat'], art: 'halftone', series: '平面考古', medium: '网点 / 斜切 / 危险条纹', desc: '版式零件的再编排：网点遇上斜切，秩序里的失衡。', featured: false },
+    { id: 'w07', no: '007', title: '反应式三阶', titleEn: 'REACTIVE TRIAD', year: '2026', tags: ['chrome', 'holo'], art: 'reactive', series: '材质研究', medium: '三阶段渐变 / 扫光', desc: '一次关于进化材质的研究：从冷凝到熔解，三段渐变的推力。', featured: false },
+    { id: 'w08', no: '008', title: '星屑贴纸', titleEn: 'STELLAR STICKER', year: '2026', tags: ['flat', 'glitch'], art: 'sticker', series: '平面考古', medium: '贴纸 / 描边字 / 故障底纹', desc: '贴纸簿的一页。撕下来，贴在任何信号上。', featured: false },
+    { id: 'w09', no: '009', title: '霓虹残响', titleEn: 'NEON RESIDUE', year: '2026', tags: ['holo'], art: 'holo', series: '材质研究', medium: '全息渐变 / 余辉', desc: '霓虹熄灭之后留在视网膜上的那层颜色。', featured: true },
+    { id: 'w10', no: '010', title: '信号葬礼', titleEn: 'SIGNAL BURIAL', year: '2026', tags: ['glitch'], art: 'glitch', series: '字形实验', medium: '切片位移 / RGB 分离', desc: '给一段中断的载波送葬。悼词是三行乱码。', featured: false },
+    { id: 'w11', no: '011', title: '液态字库', titleEn: 'LIQUID TYPESET', year: '2026', tags: ['liquid'], art: 'liquid', series: '字形实验', medium: '液态轮廓 / 字形实验', desc: '一套不肯凝固的字库。每个字都在融化与成型之间。', featured: false },
+    { id: 'w12', no: '012', title: '铬蚀', titleEn: 'CHROME ETCHING', year: '2026', tags: ['chrome'], art: 'chrome', series: '材质研究', medium: '锥形渐变 / 蚀刻纹理', desc: '把腐蚀时间刻进铬面。反射越亮，伤痕越深。', featured: false }
   ];
 
   const TAGS = [
@@ -73,6 +77,7 @@ window.AcidWorks = (() => {
         '<h3 class="mat-name">' + w.title + ' <em>' + w.titleEn + '</em></h3>' +
         '<p class="mat-cite">' + w.medium + '</p>' +
         '<span class="mat-tag">' + w.tags.map(tagLabel).join(' · ') + '</span>' +
+        '<span class="mat-tag">' + w.series + '</span>' +
       '</div></a>';
   }
 
@@ -80,6 +85,8 @@ window.AcidWorks = (() => {
     container.innerHTML = works.map((w, i) => cardMarkup(w, { linkBase: opts && opts.linkBase, index: i })).join('');
     wireCards(container);
     if (window.AcidReveal) window.AcidReveal(container);
+    const count = document.querySelector('[data-works-count]');
+    if (count) count.textContent = String(works.length).padStart(2, '0') + ' WORKS';
   }
 
   function renderFeatured(container) {
@@ -108,7 +115,7 @@ window.AcidWorks = (() => {
       if (g) g.textContent = GLYPH[w.id] || '✦';
       lbArt.appendChild(artNode);
     }
-    lbNo.textContent = 'W.' + w.no + ' / ' + w.year;
+    lbNo.textContent = 'W.' + w.no + ' / ' + w.year + ' / ' + w.series;
     lbTitle.textContent = w.title;
     lbEn.textContent = w.titleEn;
     lbDesc.textContent = w.desc;
@@ -220,6 +227,14 @@ window.AcidWorks = (() => {
         if (e.key === 'Escape') closeLightbox();
         else if (e.key === 'ArrowLeft') step(-1);
         else if (e.key === 'ArrowRight') step(1);
+        else if (e.key === 'Tab') {
+          // 焦点陷阱：Tab 循环留在灯箱对话框内
+          const f = Array.from(lb.querySelectorAll('button'));
+          if (!f.length) return;
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
       });
       const openFromHash = () => {
         const m = (location.hash || '').match(/^#(w\d+)$/);

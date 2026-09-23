@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>作品档案 WORKS ARCHIVE — 酸性信号</title>
 <meta name="description" content="酸性信号作品档案 —— 液态 / 铬 / 全息 / 故障 / 平面五个系列的酸性图形作品。数据驱动，可持续扩充。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="作品档案 WORKS ARCHIVE — 酸性信号">
+<meta property="og:description" content="液态 / 铬 / 全息 / 故障 / 平面 —— 酸性图形作品档案，点击任意作品查看细节。">
+<meta name="theme-color" content="#07070a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
@@ -104,7 +108,7 @@
   </main>
 
   <!-- 作品详情灯箱 -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品详情" hidden>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
     <div class="lb-backdrop" data-close></div>
     <figure class="lb-card">
       <button class="lb-close" type="button" data-close aria-label="关闭详情">✕</button>
@@ -113,7 +117,7 @@
       <div class="lb-art" aria-hidden="true"></div>
       <figcaption class="lb-meta">
         <span class="lb-no"></span>
-        <h3 class="lb-title"></h3>
+        <h3 class="lb-title" id="lbTitle"></h3>
         <p class="lb-en"></p>
         <p class="lb-desc"></p>
         <ul class="lb-tags"></ul>

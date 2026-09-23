@@ -5,17 +5,6 @@
 
 /* ---------- 实验页导航小改 ---------- */
 .lab-nav .nav-act { display: flex; align-items: center; gap: 12px; }
-.lab-back {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--ink);
-  text-decoration: none;
-  opacity: 0.75;
-  white-space: nowrap;
-  transition: 0.25s;
-}
-.lab-back:hover { opacity: 1; color: var(--acid); }
 
 /* ---------- hero ---------- */
 .lab-hero {

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · 信号丢失 SIGNAL LOST — 酸性信号</title>
+<meta name="description" content="信号丢失 —— 这条频率上没有内容。返回酸性信号首页。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404 信号丢失 — 酸性信号">
+<meta property="og:description" content="这条频率上没有内容。">
+<meta name="theme-color" content="#07070a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;500;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-blob" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="fx-liquid" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence id="turbA" type="fractalNoise" baseFrequency="0.012 0.026" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap id="dispA" in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="fx-soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence id="turbB" type="fractalNoise" baseFrequency="0.009 0.018" numOctaves="2" seed="21" result="n"/>
+        <feDisplacementMap id="dispB" in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <symbol id="sparkle" viewBox="0 0 24 24">
+        <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12C8 11 11 8 12 0Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">酸性信号<em>ACID SIGNAL</em></span>
+    </a>
+    <div class="nav-act">
+      <a class="lab-back" href="index.html">← 返回首页</a>
+    </div>
+  </header>
+
+  <main class="error-main">
+    <svg class="star star-1" aria-hidden="true"><use href="#sparkle"/></svg>
+    <svg class="star star-3" aria-hidden="true"><use href="#sparkle"/></svg>
+    <p class="hero-eyebrow">[ ERROR 404 ] 频率未对上 — FREQUENCY NOT FOUND</p>
+    <span class="err-code chrome distort">404</span>
+    <h1 class="err-title"><span class="glitch" data-text="信号丢失">信号丢失</span> SIGNAL LOST</h1>
+    <p class="err-sub">这条频率上没有内容。回到主信号，或者去作品档案看看。</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid magnetic" href="index.html">返回首页 HOME</a>
+      <a class="btn btn-ghost magnetic" href="works.html">作品档案 WORKS</a>
+    </div>
+    <div class="ticker">
+      <div class="track">
+        <span class="chunk">404 ✶ SIGNAL LOST ✶ 信号丢失 ✶ NO CONTENT ON THIS FREQUENCY ✶&nbsp;</span>
+        <span class="chunk">404 ✶ SIGNAL LOST ✶ 信号丢失 ✶ NO CONTENT ON THIS FREQUENCY ✶&nbsp;</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

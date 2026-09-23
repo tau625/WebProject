@@ -21,6 +21,7 @@ python -m http.server 8123
 | `main.js` | 交互：液态扭曲动画、3D 倾斜卡片、磁吸按钮、自定义光标、滚动入场、ACID MAX 开关、toast |
 | `lab.html` + `lab.css` | 独立分页「酸性实验室」：Marathon 平面 / Apex 皮肤材质 / 明日方舟版式语法的三源参考合成方案（REF.SYNTH 001），首页风格零改动 |
 | `works.html` + `works.js` + `works.css` | 作品档案：数据驱动作品墙 + 分类筛选 + 详情灯箱 + `#w0x` 站点深链 —— 艺术集展示站的主展厅骨架 |
+| `404.html` | 酸性风格 404 页（信号丢失 SIGNAL LOST） |
 | `tools/serve.py` | 开发服务器（强制 `Cache-Control: no-store`，杜绝改完样式还吃磁盘缓存） |
 | `gui-test-screenshots/` | GUI 测试截图存证（修复前后） |
 
@@ -54,7 +55,7 @@ python -m http.server 8123
 | 首页 `#signal/#lineup/#access` 活动叙事 | 可整段替换为展览履历 / 系列阐述 |
 
 ### 新增一件作品
-1. 在 `works.js` 的 `WORKS` 数组加一条数据：`{ id:'w09', no:'009', title, titleEn, year, tags:['liquid'], art:'liquid', medium, desc, featured }`；
+1. 在 `works.js` 的 `WORKS` 数组加一条数据：`{ id:'w13', no:'013', title, titleEn, year, tags:['liquid'], art:'liquid', series:'字形实验', medium, desc, featured }`（series 取：材质研究 / 字形实验 / 平面考古）；
 2. `tags` 取液态 liquid / 铬 chrome / 全息 holo / 故障 glitch / 平面 flat（分类筛选按钮自动生成）；
 3. `art` 复用现有图形语言（liquid / chrome / holo / glitch / flat / halftone / reactive / sticker）；新材料在 `works.js` 的 `artMarkup()` 与 `works.css` 各加一段；
 4. 访问 `works.html#w09` 即为该作品的永久链接（深链直达灯箱）。
